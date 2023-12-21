@@ -368,3 +368,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileBase: {fileID: 308648181498036398, guid: d9e8647360d6cf94ab0291363bbdd160, type: 3}
+  PlayerNos: 2
+  PlayerTemplate: {fileID: -6702414563961770602, guid: 0a20a79181bb2c349a619abaf5436802, type: 3}
+  TileArray: []
+  PlayerArray: []
