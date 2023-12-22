@@ -9,14 +9,15 @@ public class GenerateVoard : MonoBehaviour
     public GameObject TileBase;
     public int PlayerNos;
     public PlayerController PlayerTemplate;
-
+    public gameController GameController;
     public List<GameObject> TileArray;
 
-    public List<GameObject> PlayerArray;
+    public List<PlayerController> PlayerArray;
     // Start is called before the first frame update
     void Start()
     {
-        PlayerArray = new List<GameObject>();
+        GameController = gameObject.GetComponent<gameController>();
+        PlayerArray = new List<PlayerController>();
         TileArray = new List<GameObject>();
         Vector3 pos = transform.position;
         
@@ -43,8 +44,12 @@ public class GenerateVoard : MonoBehaviour
         {
             var player = Instantiate(PlayerTemplate);
             player.initPlayer(i+1);
-            player.Board = gameObject;
+            player.Board = this;
+            PlayerArray.Add(player);
         }
+        
+        
+        GameController.StartGame();
     }
     
 }

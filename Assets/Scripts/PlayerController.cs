@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    public GameObject Board;
+    public GenerateVoard Board;
     public int PlayerID;
 
     public void initPlayer(int pos)
@@ -35,15 +35,47 @@ public class PlayerController : MonoBehaviour
             PlayerID = pos;
         }
     }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    public void PlaceIntoTile(int Id)
     {
-        
+        GameObject tile = Board.TileArray[Id];
+
+        if (tile.transform.GetChild(1).childCount == 0)
+        {
+            gameObject.transform.parent = tile.transform.GetChild(1).transform;
+            gameObject.transform.position = new Vector3(gameObject.transform.parent.position.x,
+                gameObject.transform.parent.position.y, -1);
+        }
+        else
+        {
+            if (tile.transform.GetChild(2).childCount == 0)
+            {
+                gameObject.transform.parent = tile.transform.GetChild(2).transform;
+                gameObject.transform.position = new Vector3(gameObject.transform.parent.position.x,
+                    gameObject.transform.parent.position.y, -1);
+            }
+            else
+            {
+                if (tile.transform.GetChild(3).childCount == 0)
+                {
+                    gameObject.transform.parent = tile.transform.GetChild(3).transform;
+                    gameObject.transform.position = new Vector3(gameObject.transform.parent.position.x,
+                        gameObject.transform.parent.position.y, -1);
+                }
+                else
+                {
+                    if (tile.transform.GetChild(4).childCount == 0)
+                    {
+                        gameObject.transform.parent = tile.transform.GetChild(4).transform;
+                        gameObject.transform.position = new Vector3(gameObject.transform.parent.position.x,
+                            gameObject.transform.parent.position.y, -1);
+                    }
+                    else
+                    {
+                        Debug.Log("Player cant be placed");
+                    }
+                }  
+            }
+        }
     }
 }

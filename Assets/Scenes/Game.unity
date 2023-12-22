@@ -333,6 +333,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1243067587}
   - component: {fileID: 1243067588}
+  - component: {fileID: 1243067589}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -370,5 +371,20 @@ MonoBehaviour:
   TileBase: {fileID: 308648181498036398, guid: d9e8647360d6cf94ab0291363bbdd160, type: 3}
   PlayerNos: 2
   PlayerTemplate: {fileID: -6702414563961770602, guid: 0a20a79181bb2c349a619abaf5436802, type: 3}
+  GameController: {fileID: 0}
   TileArray: []
   PlayerArray: []
+--- !u!114 &1243067589
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1243067586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73e0fcd72d851d842ae60fbdd5578d24, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Players: []
+  Tiles: []
