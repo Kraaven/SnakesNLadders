@@ -39,17 +39,18 @@ public class GenerateVoard : MonoBehaviour
                 TileArray.Add(tile);
             }
         }
+        
+        
 
         for (int i = 0; i < PlayerNos; i++)
         {
             var player = Instantiate(PlayerTemplate);
-            player.initPlayer(i+1);
-            player.Board = this;
+            player.initPlayer(i+1, this);
             PlayerArray.Add(player);
         }
         
         
-        GameController.StartGame();
+        GameController.StartGame(this);
     }
     
 }

@@ -1,13 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
     public GenerateVoard Board;
     public int PlayerID;
+    public int PlayerPosition;
 
-    public void initPlayer(int pos)
+    public void initPlayer(int pos, GenerateVoard Tiles)
     {
         if (pos > 4)
         {
@@ -33,12 +35,15 @@ public class PlayerController : MonoBehaviour
             }
 
             PlayerID = pos;
+            Board = Tiles;
+            PlaceIntoTile(0);
         }
     }
 
     public void PlaceIntoTile(int Id)
     {
         GameObject tile = Board.TileArray[Id];
+        Debug.Log("Target Tile: "+ tile.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text);
 
         if (tile.transform.GetChild(1).childCount == 0)
         {
@@ -72,10 +77,22 @@ public class PlayerController : MonoBehaviour
                     }
                     else
                     {
-                        Debug.Log("Player cant be placed");
+                        Debug.Log("Player cant be placed " + PlayerID);
                     }
                 }  
             }
         }
+
+        PlayerPosition = Id;
+        Debug.Log("Player "+ PlayerID + " Has been moved to "+ (Id+1)+"("+PlayerPosition+")");
+        
+    }
+
+    public void AddPosition(int Am)
+    {
+        Debug.Log("Player "+ PlayerID+ " Has rolled: "+ Am + " And is moving from "+ PlayerPosition);
+        PlayerPosition += Am;
+        Debug.Log(PlayerPosition-Am + " + "+ Am+ " = "+ PlayerPosition);
+        PlaceIntoTile(PlayerPosition);
     }
 }

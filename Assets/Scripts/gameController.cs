@@ -1,21 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class gameController : MonoBehaviour
 {
     public GenerateVoard GameBoard;
-    public void StartGame()
+    public int playercount;
+    public bool gamestate;
+    public void StartGame(GenerateVoard Tiles)
     {
-        
-        GameBoard = gameObject.GetComponent<GenerateVoard>();
-        var playercount = GameBoard.PlayerNos;
-        foreach (PlayerController Piece in GameBoard.PlayerArray)
+
+        GameBoard = Tiles;
+        playercount = Tiles.PlayerNos;
+
+        StartCoroutine(PlayingGame());
+    }
+
+    IEnumerator PlayingGame()
+    {
+        gamestate = true;
+        while (gamestate)
         {
-            for (int i = 0; i < playercount; i++)
-            {
-                GameBoard.PlayerArray[i].PlaceIntoTile(0);
-            }
+            int chosen = Random.Range(0, playercount);
+            GameBoard.PlayerArray[chosen].AddPosition(1);
+            yield return new WaitForSeconds(0.1f);
         }
     }
 }
