@@ -27,8 +27,9 @@ public class gameController : MonoBehaviour
         gamestate = true;
         while (gamestate)
         {
-            foreach (var Piece in GameBoard.PlayerArray)
+            for (int i = 0; i < playercount && gamestate; i++)
             {
+                var Piece = GameBoard.PlayerArray[i];
                 int roll = Random.Range(1, 7);
                 Debug.Log(Piece.PlayerID+" Player Has rolled "+ roll);
                 Piece.AddPosition(roll);
