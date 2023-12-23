@@ -11,6 +11,7 @@ public class GenerateVoard : MonoBehaviour
     public PlayerController PlayerTemplate;
     public gameController GameController;
     public List<GameObject> TileArray;
+    public GenerateLadder Ladder;
 
     public List<PlayerController> PlayerArray;
     // Start is called before the first frame update
@@ -48,6 +49,21 @@ public class GenerateVoard : MonoBehaviour
             player.initPlayer(i+1, this);
             PlayerArray.Add(player);
         }
+
+        GenerateLadder templadder = Instantiate(Ladder);
+        GameObject temptile1 = TileArray[Random.Range(0, 100)];
+        GameObject temptile2 = TileArray[Random.Range(0, 100)];
+        templadder.InitLadder(temptile1,temptile2);
+        
+        GenerateLadder tl2 = Instantiate(Ladder);
+        GameObject tt21 = TileArray[Random.Range(0, 100)];
+        GameObject tt22 = TileArray[Random.Range(0, 100)];
+        tl2.InitLadder(tt21,tt22);
+        
+        GenerateLadder tl3 = Instantiate(Ladder);
+        // GameObject tt31 = TileArray[Random.Range(0, 100)];
+        // GameObject tt32 = TileArray[Random.Range(0, 100)];
+        tl3.InitLadder(TileArray[14],TileArray[56]);
         
         
         GameController.StartGame(this);

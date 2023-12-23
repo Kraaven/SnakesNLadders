@@ -98,11 +98,9 @@ public class PlayerController : MonoBehaviour
                 break;
             case >99:
                 PlayerPosition -= Am;
-                Debug.Log("Player "+ PlayerID+" Tried to Exceed 100. Turn Skipped");
                 break;
             case 99:
                 StartCoroutine(Move(Am));
-                Debug.Log("Player "+ PlayerID+" Has won the game");
                 Controller.gamestate = false;
                 break;
             

@@ -31,7 +31,6 @@ public class gameController : MonoBehaviour
             {
                 var Piece = GameBoard.PlayerArray[i];
                 int roll = Random.Range(1, 7);
-                Debug.Log(Piece.PlayerID+" Player Has rolled "+ roll);
                 Piece.AddPosition(roll);
                 
                 yield return new WaitForSeconds(1f);
