@@ -210,7 +210,7 @@ Camera:
   far clip plane: 1000
   field of view: 34
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 5.3
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -234,7 +234,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 5, y: 5.5, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -369,7 +369,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TileBase: {fileID: 308648181498036398, guid: d9e8647360d6cf94ab0291363bbdd160, type: 3}
-  PlayerNos: 2
+  PlayerNos: 4
   PlayerTemplate: {fileID: -6702414563961770602, guid: 0a20a79181bb2c349a619abaf5436802, type: 3}
   GameController: {fileID: 0}
   TileArray: []
@@ -386,5 +386,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 73e0fcd72d851d842ae60fbdd5578d24, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Players: []
-  Tiles: []
+  GameBoard: {fileID: 0}
+  playercount: 0
+  gamestate: 0

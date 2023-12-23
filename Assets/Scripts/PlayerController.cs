@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -8,6 +9,7 @@ public class PlayerController : MonoBehaviour
     public GenerateVoard Board;
     public int PlayerID;
     public int PlayerPosition;
+    public gameController Controller;
 
     public void initPlayer(int pos, GenerateVoard Tiles)
     {
@@ -43,8 +45,6 @@ public class PlayerController : MonoBehaviour
     public void PlaceIntoTile(int Id)
     {
         GameObject tile = Board.TileArray[Id];
-        Debug.Log("Target Tile: "+ tile.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text);
-
         if (tile.transform.GetChild(1).childCount == 0)
         {
             gameObject.transform.parent = tile.transform.GetChild(1).transform;
@@ -84,15 +84,29 @@ public class PlayerController : MonoBehaviour
         }
 
         PlayerPosition = Id;
-        Debug.Log("Player "+ PlayerID + " Has been moved to "+ (Id+1)+"("+PlayerPosition+")");
-        
+
     }
 
     public void AddPosition(int Am)
     {
-        Debug.Log("Player "+ PlayerID+ " Has rolled: "+ Am + " And is moving from "+ PlayerPosition);
         PlayerPosition += Am;
-        Debug.Log(PlayerPosition-Am + " + "+ Am+ " = "+ PlayerPosition);
-        PlaceIntoTile(PlayerPosition);
+
+        switch (PlayerPosition)
+        {
+            case < 99:
+                PlaceIntoTile(PlayerPosition);
+                break;
+            case >99:
+                PlayerPosition -= Am;
+                Debug.Log("Player "+ PlayerID+" Tried to Exceed 100. Turn Skipped");
+                break;
+            case 99:
+                Debug.Log("Player "+ PlayerID+" Has won the game");
+                Controller.gamestate = false;
+                PlaceIntoTile(PlayerPosition);
+                break;
+            
+        }
+
     }
 }

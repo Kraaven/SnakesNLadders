@@ -20,12 +20,23 @@ public class gameController : MonoBehaviour
 
     IEnumerator PlayingGame()
     {
+        foreach (var Piece in GameBoard.PlayerArray)
+        {
+            Piece.Controller = this;
+        }
         gamestate = true;
         while (gamestate)
         {
-            int chosen = Random.Range(0, playercount);
-            GameBoard.PlayerArray[chosen].AddPosition(1);
-            yield return new WaitForSeconds(0.1f);
+            foreach (var Piece in GameBoard.PlayerArray)
+            {
+                int roll = Random.Range(1, 7);
+                Debug.Log(Piece.PlayerID+" Player Has rolled "+ roll);
+                Piece.AddPosition(roll);
+                
+                yield return new WaitForSeconds(0.1f);
+            }
+            
+            
         }
     }
 }
