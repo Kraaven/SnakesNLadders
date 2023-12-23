@@ -94,19 +94,29 @@ public class PlayerController : MonoBehaviour
         switch (PlayerPosition)
         {
             case < 99:
-                PlaceIntoTile(PlayerPosition);
+                StartCoroutine(Move(Am));
                 break;
             case >99:
                 PlayerPosition -= Am;
                 Debug.Log("Player "+ PlayerID+" Tried to Exceed 100. Turn Skipped");
                 break;
             case 99:
+                StartCoroutine(Move(Am));
                 Debug.Log("Player "+ PlayerID+" Has won the game");
                 Controller.gamestate = false;
-                PlaceIntoTile(PlayerPosition);
                 break;
             
         }
 
+    }
+
+    IEnumerator Move(int AM)
+    {
+        int Ori = PlayerPosition - AM;
+        for (int i = 0; i < AM; i++)
+        {
+            PlaceIntoTile(Ori+i+1);
+            yield return new WaitForSeconds(0.1f);
+        }
     }
 }

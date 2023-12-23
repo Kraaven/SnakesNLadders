@@ -34,7 +34,7 @@ public class gameController : MonoBehaviour
                 Debug.Log(Piece.PlayerID+" Player Has rolled "+ roll);
                 Piece.AddPosition(roll);
                 
-                yield return new WaitForSeconds(0.1f);
+                yield return new WaitForSeconds(1f);
             }
             
             
