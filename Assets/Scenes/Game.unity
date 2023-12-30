@@ -389,3 +389,4 @@ MonoBehaviour:
   GameBoard: {fileID: 0}
   playercount: 0
   gamestate: 0
+  LPrefab: {fileID: 8218353563263552793, guid: 188d1b8a1d04a944a91105e80706f624, type: 3}

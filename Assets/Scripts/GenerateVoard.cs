@@ -11,7 +11,6 @@ public class GenerateVoard : MonoBehaviour
     public PlayerController PlayerTemplate;
     public gameController GameController;
     public List<GameObject> TileArray;
-    public GenerateLadder Ladder;
 
     public List<PlayerController> PlayerArray;
     // Start is called before the first frame update
@@ -28,6 +27,7 @@ public class GenerateVoard : MonoBehaviour
             {
                 GameObject tile = Instantiate(TileBase, new Vector3(pos.x+j, pos.y+i, 0), Quaternion.identity);
                 tile.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = (i * 10 + j+1).ToString();
+                tile.GetComponent<TileEntity>().TileNum = i * 10 + j + 1;
                 tile.transform.parent = gameObject.transform;
                 TileArray.Add(tile);
             }
@@ -36,6 +36,7 @@ public class GenerateVoard : MonoBehaviour
             {
                 GameObject tile = Instantiate(TileBase, new Vector3(pos.x+j-1, pos.y+i+1, 0), Quaternion.identity);
                 tile.transform.GetChild(0).GetChild(0).GetComponent<TMP_Text>().text = (i * 10 + ((10 - j))+11).ToString();
+                tile.GetComponent<TileEntity>().TileNum = i * 10 + ((10 - j))+11;
                 tile.transform.parent = gameObject.transform;
                 TileArray.Add(tile);
             }
@@ -49,22 +50,6 @@ public class GenerateVoard : MonoBehaviour
             player.initPlayer(i+1, this);
             PlayerArray.Add(player);
         }
-
-        GenerateLadder templadder = Instantiate(Ladder);
-        GameObject temptile1 = TileArray[Random.Range(0, 100)];
-        GameObject temptile2 = TileArray[Random.Range(0, 100)];
-        templadder.InitLadder(temptile1,temptile2);
-        
-        GenerateLadder tl2 = Instantiate(Ladder);
-        GameObject tt21 = TileArray[Random.Range(0, 100)];
-        GameObject tt22 = TileArray[Random.Range(0, 100)];
-        tl2.InitLadder(tt21,tt22);
-        
-        GenerateLadder tl3 = Instantiate(Ladder);
-        // GameObject tt31 = TileArray[Random.Range(0, 100)];
-        // GameObject tt32 = TileArray[Random.Range(0, 100)];
-        tl3.InitLadder(TileArray[14],TileArray[56]);
-        
         
         GameController.StartGame(this);
     }

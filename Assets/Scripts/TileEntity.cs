@@ -8,6 +8,7 @@ using Random = UnityEngine.Random;
 
 public class TileEntity : MonoBehaviour
 {
+    public int TileNum;
     enum TileState
     {
         None,

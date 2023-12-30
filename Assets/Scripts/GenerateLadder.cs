@@ -62,7 +62,7 @@ public class GenerateLadder : MonoBehaviour
         
         transform.position = Vector2.Lerp(Target1.transform.position, Target2.transform.position,0.5f);
         transform.Translate(0,0,-1.5f);
-        transform.localScale = new Vector3(0.75f, 1, 1);
+        transform.localScale = new Vector3(0.60f, 1, 1);
         LookAt2D();
 
 

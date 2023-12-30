@@ -99,3 +99,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Board: {fileID: 0}
   PlayerID: 0
+  PlayerPosition: 0
+  Controller: {fileID: 0}
