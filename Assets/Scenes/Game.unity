@@ -409,6 +409,8 @@ MonoBehaviour:
   playercount: 0
   gamestate: 0
   LPrefab: {fileID: 8218353563263552793, guid: 188d1b8a1d04a944a91105e80706f624, type: 3}
+  Sprefab: {fileID: 1895828264208544575, guid: 56a48cbda7b8e71468cb1696b1352357, type: 3}
+  Climbspeed: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
