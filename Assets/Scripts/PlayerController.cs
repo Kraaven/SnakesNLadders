@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.Mathematics;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class PlayerController : MonoBehaviour
 {
@@ -114,7 +116,32 @@ public class PlayerController : MonoBehaviour
         for (int i = 0; i < AM; i++)
         {
             PlaceIntoTile(Ori+i+1);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(0.3f);
         }
+
+        TileEntity destination = Board.TileArray[PlayerPosition].GetComponent<TileEntity>();
+        Debug.Log("Enacting Action");
+        destination.TileAction(this);
+    }
+
+    public void MovePath(Spline temp, int temp2)
+    {
+        StartCoroutine(MoveSpline(temp, temp2));
+    }
+    IEnumerator MoveSpline(Spline move,int destitile)
+    {
+        int speed = Controller.Climbspeed;
+        float len = move.CalculateLength(transform.localToWorldMatrix);
+        Transform playerpos = gameObject.transform;
+        for (float i = 0; i < 101; i++)
+        {
+            Debug.Log("Applying: "+ i/100);
+            playerpos.position = move.EvaluatePosition(i / 100);
+            playerpos.position += new Vector3(0, 0, -1);
+            Debug.Log(move.EvaluatePosition(i / 100));
+            yield return new WaitForSeconds(speed * len / 1000);
+        }
+        
+        PlaceIntoTile(destitile);
     }
 }

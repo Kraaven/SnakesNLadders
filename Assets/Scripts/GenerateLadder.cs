@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.Splines;
 
 public class GenerateLadder : MonoBehaviour
 {
@@ -14,17 +15,19 @@ public class GenerateLadder : MonoBehaviour
     [Header("Targets")] 
     public GameObject Target1;
     public GameObject Target2;
+    public Spline path;
     
     
     public void InitLadder(GameObject T1, GameObject T2)
     {
         Target1 = T1;
         Target2 = T2;
+        path = new Spline();
+        
         int Dfac = (int)Vector2.Distance(Target1.transform.position, Target2.transform.position);
         if (Dfac % 2 == 0)
         {
             float st = (Dfac / 2) + 0.5f;
-            Debug.Log("TopTile: " + st);
             GameObject top = Instantiate(TopTile, new Vector2(0,st), Quaternion.Euler(0,0,0));
             top.transform.parent = gameObject.transform;
             st--;
@@ -65,7 +68,10 @@ public class GenerateLadder : MonoBehaviour
         transform.localScale = new Vector3(0.60f, 1, 1);
         LookAt2D();
 
+        path.Add(new BezierKnot(Target1.transform.position));
+        path.Add(new BezierKnot(Target2.transform.position));
 
+        Target1.GetComponent<TileEntity>().path = path;
     }
     
 
