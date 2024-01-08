@@ -22,6 +22,11 @@ public class TileEntity : MonoBehaviour
 
     [SerializeField] private TileState state;
 
+    public void Start()
+    {
+        state = TileState.None;
+    }
+
     public void TileAction(PlayerController piece)
     {
         switch (state)
@@ -51,6 +56,7 @@ public class TileEntity : MonoBehaviour
                 break;
             case 2:
                 state = TileState.Snake;
+                Debug.Log("Tile: "+ TileNum+ " has been set to Snake Point with result set to: "+ (ResultTile+1));
                 break;
         }
     }

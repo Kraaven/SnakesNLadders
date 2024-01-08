@@ -28,6 +28,7 @@ public class gameController : MonoBehaviour
         
         GenerateLadders(Random.Range(7,13));
         GenerateSnakes(Random.Range(6,9));
+        //GenerateSnakes(1);
         StartCoroutine(PlayingGame());
         
     }
@@ -230,11 +231,26 @@ public class gameController : MonoBehaviour
                 {
                     foreach (var snake in Snakes)
                     {
-                        if (Tile1 == GameBoard.TileArray[(int)snake.x] || Tile1 == GameBoard.TileArray[(int)snake.y] ||GameBoard.TileArray[TilePos] == GameBoard.TileArray[(int)snake.x] || GameBoard.TileArray[TilePos] == GameBoard.TileArray[(int)snake.y]  )
+                        //Check if snakes share the points with other snakes
+                        if (Tile1 == GameBoard.TileArray[(int)snake.x] || Tile1 == GameBoard.TileArray[(int)snake.y] ||GameBoard.TileArray[TilePos] == GameBoard.TileArray[(int)snake.x] || GameBoard.TileArray[TilePos] == GameBoard.TileArray[(int)snake.y])
                         {
                             intersected = true;
                             break;
                         }
+                        
+                        //check if snakes share their points with ladders
+                        
+                        // foreach (var ladder in Ladders)
+                        // {
+                        //     if (GameBoard.TileArray[(int)ladder.x] == GameBoard.TileArray[(int)snake.x] ||
+                        //         GameBoard.TileArray[(int)ladder.x] == GameBoard.TileArray[(int)snake.y] ||
+                        //         GameBoard.TileArray[(int)ladder.y] == GameBoard.TileArray[(int)snake.x] ||
+                        //         GameBoard.TileArray[(int)ladder.y] == GameBoard.TileArray[(int)snake.y])
+                        //     {
+                        //         intersected = true;
+                        //         break; 
+                        //     }   
+                        // }
                     }
                     
                 }
@@ -245,11 +261,21 @@ public class gameController : MonoBehaviour
             Tile2 = GameBoard.TileArray[TilePos];
             
             GameObject tempsnake = Instantiate(Sprefab,new Vector3(0,0,0),Quaternion.identity);
-            tempsnake.GetComponent<InitSnake>().initSnake(Tile2.transform.position,Tile1.transform.position,Random.Range(3,7));
+            tempsnake.GetComponent<InitSnake>().initSnake(Tile2,Tile1,Random.Range(3,7));
             Snakes.Add(new Vector2(Tile1.GetComponent<TileEntity>().TileNum -1,Tile2.GetComponent<TileEntity>().TileNum-1));
         }
         
-        SetupLadders();
-        Debug.Log("Snakes setup for: "+ Snakes.Count+ " Ladders");
+        //SetupSnakes();
+        Debug.Log("Snakes setup for: "+ Snakes.Count+ " sneks");
+    }
+    
+    private void SetupSnakes()
+    {
+        Debug.Log("Setting Up Snakes");
+        foreach (var snek in Snakes)
+        {
+            GameBoard.TileArray[(int)snek.y].GetComponent<TileEntity>().ResultTile = (int)snek.y;
+            GameBoard.TileArray[(int)snek.y].GetComponent<TileEntity>().SetState(2);
+        }
     }
 }
